@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:recipesclass/recipe.dart';
 
 class RecipeDetail extends StatefulWidget {
@@ -14,9 +14,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.recipe.label)),
-      body: SafeArea(
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(middle: Text(widget.recipe.label)),
+      child: SafeArea(
         child: Column(
           spacing: 16,
           children: [
@@ -38,11 +38,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
               ),
             ),
             Text("Server quantidade de Pessoas:"),
-            Slider(
+            CupertinoSlider(
               min: 1,
               max: 10,
               divisions: 9,
-              label: "${_sliderval * widget.recipe.id}  Pessoas Servindo",
               value: _sliderval.toDouble(),
               onChanged: (newValueSlider) {
                 setState(() {

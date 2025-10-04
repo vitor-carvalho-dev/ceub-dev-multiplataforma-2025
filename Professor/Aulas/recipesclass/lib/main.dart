@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:recipesclass/recipe.dart';
 import 'package:recipesclass/recipe_detail.dart';
 
@@ -11,11 +11,11 @@ void main() {
 class RecipeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return CupertinoApp(
       title: "Receitas",
-      debugShowCheckedModeBanner: true,
-      theme: ThemeData().copyWith(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+      debugShowCheckedModeBanner: false,
+      theme: CupertinoThemeData().copyWith(
+        primaryColor: CupertinoColors.activeBlue,
       ),
       home: MyHomePage(),
     );
@@ -30,46 +30,56 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Livro de Receitas"), elevation: 8),
-      body: SafeArea(
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(middle: Text("Livro de Receitas")),
+      child: SafeArea(
         child: ListView.builder(
           itemCount: Recipe.mock.length,
           itemBuilder: (context, index) {
             Recipe itemRecipe = Recipe.mock[index];
 
             //Esse código constroi o item da lista
-            return InkWell(
+            return GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  CupertinoPageRoute(
                     builder: (context) {
                       return RecipeDetail(recipe: itemRecipe);
                     },
                   ),
                 );
               },
-              child: Card(
-                color: Random(index).nextBool() ? Colors.purple : Colors.blue,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
-                  margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        child: Image.network(itemRecipe.imgUrl),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Random(index).nextBool()
+                      ? CupertinoColors.activeGreen
+                      : CupertinoColors.systemIndigo,
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: CupertinoColors.systemGrey4,
+                      blurRadius: 4,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.all(8),
+                padding: EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      child: Image.network(itemRecipe.imgUrl),
+                    ),
+                    Text(
+                      itemRecipe.label,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: CupertinoColors.white,
                       ),
-                      Text(
-                        itemRecipe.label,
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             );
