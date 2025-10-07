@@ -1,6 +1,7 @@
 Aplicativo Flutter desenvolvido como projeto final da disciplina **Desenvolvimento Mobile Multiplataforma**.  
 O app simula uma plataforma de restaurantes, exibindo categorias, estabelecimentos e postagens recentes.
-
+# ceub-dev-multiplataforma-2025
+# Atividade RESTAURANTE
 
 
 ## Funcionalidades
