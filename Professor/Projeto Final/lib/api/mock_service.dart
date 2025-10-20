@@ -12,7 +12,7 @@ class ExploreData {
 }
 
 class MockService {
-  final String _baseUrl = "https://app-restaurant.wiremockapi.cloud";
+  final String _baseUrl = "https://mpf1be07de1c4524acd6.free.beeceptor.com";
 
   Future<ExploreData> getExploreData() async {
     List<Restaurant> restaurants = await _getRestaurants();
